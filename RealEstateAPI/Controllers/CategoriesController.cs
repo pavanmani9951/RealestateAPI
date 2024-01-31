@@ -45,6 +45,8 @@ namespace RealEstateAPI.Controllers
             return Ok(newCategory);
             
         }
+
+
         [HttpPut("{id}")]
         public ActionResult<IEnumerable<Category>>UpdateCategories(int id,[FromBody]Category updateCategory) 
         {
@@ -56,8 +58,9 @@ namespace RealEstateAPI.Controllers
             category.Id= updateCategory.Id;
             category.Name= updateCategory.Name;
             category.ImageUrl= updateCategory.ImageUrl;
-        return Ok(category);
+           return Ok(category);
         }
+
         [HttpDelete]
         public ActionResult<IEnumerable<Category>> DeleteCategories(int id)
         {
