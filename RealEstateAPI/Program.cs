@@ -7,6 +7,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMvc().AddXmlDataContractSerializerFormatters(); // this will help to convert data to xml by clients choice (by default in json)
 
 var app = builder.Build();
 

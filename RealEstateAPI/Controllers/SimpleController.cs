@@ -14,17 +14,17 @@ namespace RealEstateAPI.Controllers
         ApiDbContext _db = new ApiDbContext();
 
         [HttpGet]
-        public IEnumerable<Category> Get()
+        public IActionResult Get()
         {
-            return _db.Categories;
+            return Ok(_db.Categories);
         }
 
 
 
         [HttpGet("{id:int}")]
-        public ActionResult<Category> GetCategory(int id)
+        public IActionResult GetCategory(int id)
         {
-            var category = _db.Categories.FirstOrDefault(c => c.Id == id);
+            var category = _db.Categories.Find(id);
             if (category == null)
             {
                 return NotFound();
@@ -35,43 +35,48 @@ namespace RealEstateAPI.Controllers
 
         // POST api/<SimpleController>
         [HttpPost]
-        public ActionResult<Category> Post([FromBody] Category newCategory)
+        public IActionResult Post([FromBody] Category newCategory)
         {
             //if (newCategory.Id == null)
             //{
             //    return BadRequest();
             //}
-            //it has taken the id value by default the primary key 
+            //it has taken the id value by default the primary key so no need to use the below method.
             //newCategory.Id=_db.Categories.OrderByDescending(c=> c.Id).FirstOrDefault().Id+1;
             _db.Categories.Add(newCategory);
             _db.SaveChanges();
-            return Ok(newCategory);
+            return StatusCode(StatusCodes.Status201Created);
         }
 
         // PUT api/<SimpleController>/5
         [HttpPut("{id}")]
-        public ActionResult<IEnumerable<Category>> Put(int id, [FromBody] Category updateCategory)
+        public IActionResult Put(int id, [FromBody] Category updateCategory)
         {
-            var category = _db.Categories.FirstOrDefault(c => c.Id == id);
+            var category = _db.Categories.Find(id);
             if (category == null)
             {
-                return BadRequest();
+                return NotFound("no record founded");
             }
-            category.Id = updateCategory.Id;
+            
             category.Name = updateCategory.Name;
             category.ImageUrl = updateCategory.ImageUrl;
-            _db.Categories.Update(category);
+            //_db.Categories.Update(category);
             _db.SaveChanges();
             return Ok(category);
         }
 
         // DELETE api/<SimpleController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            var category = _db.Categories.FirstOrDefault(c => c.Id == id);
+            var category = _db.Categories.Find(id);
+            if (category == null)
+            {
+                return NotFound("no record found to delete");
+            }
             _db.Categories.Remove(category);
             _db.SaveChanges();
+            return Ok("Deleted successfully");
         }
     }
 }
