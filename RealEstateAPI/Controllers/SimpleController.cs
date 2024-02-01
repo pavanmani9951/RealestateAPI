@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*using Microsoft.AspNetCore.Mvc;
 using RealEstateAPI.Data;
 using RealEstateAPI.Models;
 
@@ -10,7 +10,7 @@ namespace RealEstateAPI.Controllers
     public class SimpleController : ControllerBase
     {
         // we have to use dependency injection or dbcontext instance hereee.....
-        
+
         ApiDbContext _db = new ApiDbContext();
 
         [HttpGet]
@@ -86,3 +86,4 @@ namespace RealEstateAPI.Controllers
         }
     }
 }
+*/

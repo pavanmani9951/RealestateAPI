@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿/*using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateAPI.Data;
 using RealEstateAPI.Models;
@@ -36,7 +36,7 @@ namespace RealEstateAPI.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult<IEnumerable<Category>> PostCategories([FromBody] Category newCategory)
+		public IActionResult PostCategories([FromBody] Category newCategory)
 		{
 			if (newCategory == null)
 			{
@@ -79,3 +79,4 @@ namespace RealEstateAPI.Controllers
 
 
 }
+*/
