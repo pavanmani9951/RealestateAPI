@@ -44,7 +44,7 @@ namespace RealEstateAPI.Controllers
             var currentUser = _db.Users.FirstOrDefault(u=>u.Email == user.Email && u.Password==user.Password);
             if (currentUser == null) 
             {
-                return NotFound("Enter the credentials to login");
+                return NotFound();
             }
 
             // if user found generate jwt token
@@ -68,7 +68,7 @@ namespace RealEstateAPI.Controllers
                 issuer: _config["JWT:Issuer"],
                 audience: _config["JWT:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: credentials
                 );
             var jwt = new JwtSecurityTokenHandler().WriteToken(token); // this line return token in string format 
